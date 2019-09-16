@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.5.RELEASE'
+	id 'java'
+	id "org.sonarqube" version "2.7"
+}
+
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
+
+group = 'com.cg.dcp'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+
+sonarqube {
+	properties {
+		property 'sonar.projectName', 'spring-cloud-security-ldap-integration'
+}
+
+repositories {
+	mavenCentral()
+}
+
+
+jacocoTestReport {
+reports {
+	xml.enabled true
+	}
+}    
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.ldap:spring-ldap-core'
+	implementation 'org.springframework.security:spring-security-ldap'
+	implementation 'com.unboundid:unboundid-ldapsdk'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
